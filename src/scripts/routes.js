@@ -6,7 +6,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 	$stateProvider
 		.state('home', {
 			url: '/',
-			templateUrl: 'views/home.html',
+			templateUrl: 'dist/views/home.html',
 			controller: 'HomeCtrl'
 		});
 
