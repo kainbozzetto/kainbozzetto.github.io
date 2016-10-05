@@ -1,0 +1,22 @@
+.box {
+  border: 1px solid #99DD99;
+  background-color: #DDFFDD;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fadein {
+  animation: fadein 2s;
+}

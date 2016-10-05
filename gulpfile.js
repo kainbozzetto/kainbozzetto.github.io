@@ -7,6 +7,8 @@ var sass = require('gulp-ruby-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var cssnano = require('gulp-cssnano');
 var rename = require('gulp-rename');
+var eslint = require('gulp-eslint');
+var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('styles', function() {
   gulp.src('./node_modules/bootstrap/dist/css/bootstrap.min.css')
@@ -16,8 +18,18 @@ gulp.task('styles', function() {
     .pipe(autoprefixer('last 2 version'))
     .pipe(gulp.dest('./dist/styles'))
     .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.init())
     .pipe(cssnano())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist/styles'));
+});
+
+gulp.task('linting', function() {
+  return gulp.src('src/scripts/**/*.js')
+    .pipe(eslint({
+      useEslintrc: true
+    }))
+    .pipe(eslint.format());
 });
 
 gulp.task('browserify', function() {
@@ -25,7 +37,9 @@ gulp.task('browserify', function() {
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(buffer())
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(uglify())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist/scripts'));
 });
 
@@ -34,10 +48,12 @@ gulp.task('views', function() {
     .pipe(gulp.dest('./dist/views'));
 })
 
-gulp.task('default', ['browserify', 'views', 'styles' , 'watch']);
+gulp.task('default', ['linting', 'browserify', 'views', 'styles', 'watch']);
 
 gulp.task('watch', function() {
-  gulp.watch('./src/scripts/**/*.js', ['browserify']);
+  gulp.watch('./src/scripts/**/*.js', ['linting', 'browserify']);
+
+  gulp.watch('./src/styles/**/*.scss', ['styles'])
 
   gulp.watch('./src/**/*.html', ['views']);
 });

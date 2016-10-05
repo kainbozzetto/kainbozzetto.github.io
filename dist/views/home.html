@@ -1,15 +1,20 @@
-<h1>{{message}}</h1>
+<h1>Welcome</h1>
+Please see below for my GitHub repositories.
 <br>
 <div class='row'>
-  <div ng-repeat='git in gits'>
-    <div class='clearfix' ng-if='$index % 4 == 0'></div>
-    <div class='col-lg-3'>
-      <h3>{{git.name}}</h3>
-      <br>
-      <small>{{git.description}}</small>
-      <br>
-      <br>
-      <span class='label label-info'>{{git.language}}</span>
+  <div ng-repeat='git in gits' ng-class='{"fadein": gits}'>
+    <div class='clearfix visible-lg-block' ng-if='$index % 4 == 0'></div>
+    <div class='clearfix visible-md-block' ng-if='$index % 3 == 0'></div>
+    <div class='clearfix visible-xs-block visible-sm-block' ng-if='$index % 2 == 0'></div>
+    <div class='col-lg-3 col-md-4 col-xs-6'>
+      <div class='box'>
+        <h3><a ng-href='{{git.html_url}}'>{{git.name}}</a></h3>
+        <br>
+        <small>{{git.description}}</small>
+        <br>
+        <br>
+        <span class='label label-info'>{{git.language}}</span>
+      </div>
     </div>
   </div>
 </div>

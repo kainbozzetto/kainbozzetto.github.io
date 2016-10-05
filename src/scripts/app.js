@@ -7,7 +7,7 @@ require('bootstrap');
 
 //require('../node_modules/bootstrap/dist/css/boostrap.min.css');
 
-var app = angular.module('app', ['ui.router']);
+angular.module('app', ['ui.router']);
 
-var routes = require('./routes');
-var controllers = require('./controllers');
+require('./routes');
+require('./controllers');

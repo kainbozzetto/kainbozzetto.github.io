@@ -3,7 +3,7 @@ module.exports = ['$scope', '$http', function($scope, $http) {
 
   $http.get('https://api.github.com/users/kainbozzetto/repos', {
     headers: {
-      'Access-Control-Allow-Origin': *
+      //'Access-Control-Allow-Origin': '*'
     }
   })
     .then(function(data) {
